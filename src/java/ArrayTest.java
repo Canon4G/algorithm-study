@@ -1,47 +1,100 @@
+import java.util.Arrays;
+
 /**
  * create by Canon4G 2019-05-24
  **/
 public class ArrayTest {
 
     public static void main(String[] args) {
-        ArrayTest array = new ArrayTest(10);
-        array.insert(1, 0);
-        array.insert(2, 0);
-        array.insert(3, 0);
-        array.insert(4, 0);
-        array.print();
+        ArrayTest arrayTest = new ArrayTest(10);
+        insert(1, 0);
+        insert(2, 0);
+        insert(3, 0);
+        print();
+        update(2, 0);
+        print();
+        delete(0);
+        print();
+        System.out.println(search(0));
+        insert(1, 10);
+        print();
     }
 
-    private int[] array;
-    private int size;
+    private static int[] arr;
 
-    public ArrayTest(int capacity) {
-        this.array = new int[capacity];
-        size = 0;
+    public ArrayTest(int size) {
+        this.arr = new int[size];
     }
 
     /**
      * 插入
-     * @param element   元素值
-     * @param index     索引
+     * @param element 元素
+     * @param index   索引
      */
-    private void insert(int element, int index) {
-        if (0 < index || index > size) {
-            throw new IndexOutOfBoundsException("数组越界");
+    private static void insert(int element, int index) {
+        if (0 > index) {
+            throw new IndexOutOfBoundsException("索引越界");
         }
-        for (int i = size - 1; i >= i; i--) {
-            array[i + 1] = array[index];
+        if (index > arr.length - 1) {
+            resize();
         }
-        array[index] = element;
-        size++;
+        for (int i = arr.length - 1; i >= index; i--) {
+            if (0 != i) {
+                arr[i] = arr[i - 1];
+            }
+        }
+        arr[index] = element;
+    }
+
+    /**
+     * 删除
+     * @param index 索引
+     */
+    private static void delete(int index) {
+        if (0 > index || index > arr.length - 1) {
+            throw new IndexOutOfBoundsException("索引越界");
+        }
+        for (int i = index; i < arr.length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+    }
+
+    /**
+     * 更新
+     * @param element 元素
+     * @param index   索引
+     */
+    private static void update(int element, int index) {
+        if (0 > index || index > arr.length - 1) {
+            throw new IndexOutOfBoundsException("索引越界");
+        }
+        arr[index] = element;
+    }
+
+    /**
+     * 查询
+     * @param index 索引
+     */
+    private static int search(int index) {
+        if (0 > index || index > arr.length - 1) {
+            throw new IndexOutOfBoundsException("索引越界");
+        }
+        return arr[index];
+    }
+
+    /**
+     * 数组扩容
+     */
+    private static void resize() {
+        int[] arrNew = new int[arr.length * 2];
+        System.arraycopy(arr, 0, arrNew, 0, arr.length);
+        arr = arrNew;
     }
 
     /**
      * 打印数组
      */
-    private void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(array[i]);
-        }
+    private static void print() {
+        System.out.println(Arrays.toString(arr));
     }
 }
