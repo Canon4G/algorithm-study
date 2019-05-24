@@ -1,5 +1,3 @@
-package java;
-
 /**
  * create by Canon4G 2019-05-24
  **/
