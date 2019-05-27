@@ -30,7 +30,7 @@ public class SinglyLinkedList {
      * @param data      节点值
      * @param index     索引
      *
-     * 时间复杂度: O(n)
+     * TODO: 时间复杂度: O(n) 可能不正确
      */
     private void insert(int data, int index) {
         if (0 > index || index > size) {
@@ -66,7 +66,7 @@ public class SinglyLinkedList {
      * 删除
      * @param index     索引
      *
-     * 时间复杂度: O(n)
+     * TODO: 时间复杂度: O(n) 可能不正确
      */
     private void delete(int index) {
         if (0 > index || index > size) {
@@ -98,7 +98,7 @@ public class SinglyLinkedList {
      * @param data      节点值
      * @param index     索引
      *
-     * 时间复杂度: O(n)
+     * TODO: 时间复杂度: O(n) 可能不正确
      */
     private void update(int data, int index) {
         if (0 > index || index > size) {
