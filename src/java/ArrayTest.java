@@ -7,17 +7,17 @@ public class ArrayTest {
 
     public static void main(String[] args) {
         ArrayTest arrayTest = new ArrayTest(10);
-        insert(1, 0);
-        insert(2, 0);
-        insert(3, 0);
-        print();
-        update(2, 0);
-        print();
-        delete(0);
-        print();
-        System.out.println(search(0));
-        insert(1, 10);
-        print();
+        arrayTest.insert(1, 0);
+        arrayTest.insert(2, 0);
+        arrayTest.insert(3, 0);
+        arrayTest.print();
+        arrayTest.update(2, 0);
+        arrayTest.print();
+        arrayTest.delete(0);
+        arrayTest.print();
+        System.out.println(arrayTest.search(0));
+        arrayTest.insert(1, 10);
+        arrayTest.print();
     }
 
     private static int[] arr;
@@ -31,7 +31,7 @@ public class ArrayTest {
      * @param element 元素
      * @param index   索引
      */
-    private static void insert(int element, int index) {
+    private void insert(int element, int index) {
         if (0 > index) {
             throw new IndexOutOfBoundsException("索引越界");
         }
@@ -50,7 +50,7 @@ public class ArrayTest {
      * 删除
      * @param index 索引
      */
-    private static void delete(int index) {
+    private void delete(int index) {
         if (0 > index || index > arr.length - 1) {
             throw new IndexOutOfBoundsException("索引越界");
         }
@@ -64,7 +64,7 @@ public class ArrayTest {
      * @param element 元素
      * @param index   索引
      */
-    private static void update(int element, int index) {
+    private void update(int element, int index) {
         if (0 > index || index > arr.length - 1) {
             throw new IndexOutOfBoundsException("索引越界");
         }
@@ -75,7 +75,7 @@ public class ArrayTest {
      * 查询
      * @param index 索引
      */
-    private static int search(int index) {
+    private int search(int index) {
         if (0 > index || index > arr.length - 1) {
             throw new IndexOutOfBoundsException("索引越界");
         }
@@ -85,7 +85,7 @@ public class ArrayTest {
     /**
      * 数组扩容
      */
-    private static void resize() {
+    private void resize() {
         int[] arrNew = new int[arr.length * 2];
         System.arraycopy(arr, 0, arrNew, 0, arr.length);
         arr = arrNew;
@@ -94,7 +94,7 @@ public class ArrayTest {
     /**
      * 打印数组
      */
-    private static void print() {
+    private void print() {
         System.out.println(Arrays.toString(arr));
     }
 }
