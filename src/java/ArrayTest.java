@@ -30,6 +30,8 @@ public class ArrayTest {
      * 插入
      * @param element 元素
      * @param index   索引
+     *
+     * 时间复杂度 O(n)
      */
     private void insert(int element, int index) {
         if (0 > index) {
@@ -49,6 +51,8 @@ public class ArrayTest {
     /**
      * 删除
      * @param index 索引
+     *
+     * 时间复杂度: O(n)
      */
     private void delete(int index) {
         if (0 > index || index > arr.length - 1) {
@@ -63,6 +67,8 @@ public class ArrayTest {
      * 更新
      * @param element 元素
      * @param index   索引
+     *
+     * 时间复杂度: O(1)
      */
     private void update(int element, int index) {
         if (0 > index || index > arr.length - 1) {
@@ -74,6 +80,8 @@ public class ArrayTest {
     /**
      * 查询
      * @param index 索引
+     *
+     * 时间复杂度: O(1)
      */
     private int search(int index) {
         if (0 > index || index > arr.length - 1) {

@@ -29,6 +29,8 @@ public class SinglyLinkedList {
      * 新增
      * @param data      节点值
      * @param index     索引
+     *
+     * 时间复杂度: O(n)
      */
     private void insert(int data, int index) {
         if (0 > index || index > size) {
@@ -63,6 +65,8 @@ public class SinglyLinkedList {
     /**
      * 删除
      * @param index     索引
+     *
+     * 时间复杂度: O(n)
      */
     private void delete(int index) {
         if (0 > index || index > size) {
@@ -93,6 +97,8 @@ public class SinglyLinkedList {
      * 更新
      * @param data      节点值
      * @param index     索引
+     *
+     * 时间复杂度: O(n)
      */
     private void update(int data, int index) {
         if (0 > index || index > size) {
@@ -107,6 +113,8 @@ public class SinglyLinkedList {
     /**
      * 查询
      * @param index     索引
+     *
+     * 时间复杂度: O(n)
      */
     private Node search(int index) {
         if (0 > index || index > size) {
