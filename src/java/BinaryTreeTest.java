@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -32,6 +33,10 @@ public class BinaryTreeTest {
         System.out.println();
         System.out.println("非迭代后序遍历：");
         postorderTraversalByStack(binaryTree);
+        System.out.println();
+        System.out.println("<============>");
+        System.out.println("层序遍历：");
+        levelorderTraversal(binaryTree);
     }
 
     /**
@@ -155,6 +160,25 @@ public class BinaryTreeTest {
                 treeNode = null;
             }
 
+        }
+    }
+
+    /**
+     * 层序遍历
+     * @param root      根节点
+     */
+    private static void levelorderTraversal(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode treeNode = queue.poll();
+            System.out.print(treeNode.data + " ");
+            if (null != treeNode.leftNode) {
+                queue.offer(treeNode.leftNode);
+            }
+            if (null != treeNode.rightNode) {
+                queue.offer(treeNode.rightNode);
+            }
         }
     }
 
