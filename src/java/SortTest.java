@@ -6,10 +6,11 @@ import java.util.Arrays;
 public class SortTest {
 
     public static void main(String[] args) {
-        int[] a = new int[] {1, 2, 3, 5, 4, 6, 7};
+        int[] a = new int[] {2, 3, 4, 5, 6, 1, 7};
 //        bubbleSort(a);
 //        bubbleSort1(a);
-        bubbleSort2(a);
+//        bubbleSort2(a);
+        cocktailSort(a);
         System.out.println(Arrays.toString(a));
     }
 
@@ -53,7 +54,7 @@ public class SortTest {
 
     /**
      * 优化冒泡排序
-     * @param arr       带排序数组
+     * @param arr       待排序数组
      */
     private static void bubbleSort2(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
@@ -72,6 +73,32 @@ public class SortTest {
             }
             if (!swapFlag) {
                 break;
+            }
+        }
+    }
+
+    /**
+     * 鸡尾酒排序
+     * @param arr       待排序数组
+     */
+    private static void cocktailSort(int[] arr) {
+        for (int i = 0; i < arr.length / 2; i++) {
+            // 正序遍历排序
+            int temp;
+            for (int j = i; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+            // 倒叙遍历排序
+            for (int j = arr.length - 1; j > i; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                }
             }
         }
     }
