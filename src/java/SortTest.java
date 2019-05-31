@@ -13,7 +13,8 @@ public class SortTest {
 //        cocktailSort(a);
 //        cocktailSort1(a);
 //        cocktailSort2(a);
-        quickSortDouble(a, 0, a.length - 1);
+//        quickSortDouble(a, 0, a.length - 1);
+        quickSortSingle(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
 
@@ -186,6 +187,46 @@ public class SortTest {
     }
 
     /**
+     * 快速排序(单边循环)
+     * @param arr           待排序数组
+     * @param startIndex    起点左边
+     * @param endIndex      终点坐标
+     */
+    private static void quickSortSingle(int[] arr, int startIndex, int endIndex) {
+        while (startIndex >= endIndex) {
+            return;
+        }
+        int pivotIndex = getPivotIndexSingle(arr, startIndex, endIndex);
+        // 分治法
+        quickSortSingle(arr, startIndex, pivotIndex - 1);
+        quickSortSingle(arr, pivotIndex + 1, endIndex);
+    }
+
+    /**
+     * 获得基准元素位置(单边循环)
+     * @param arr           待排序数组
+     * @param startIndex    起点坐标
+     * @param endIndex      终点坐标
+     * @return
+     */
+    private static int getPivotIndexSingle(int[] arr, int startIndex, int endIndex) {
+        int pivot = arr[startIndex];
+        int mark = startIndex;
+        int temp;
+        for (int i = startIndex + 1; i <= endIndex; i++) {
+            if (arr[i] < pivot) {
+                mark++;
+                temp = arr[mark];
+                arr[mark] = arr[i];
+                arr[i] = temp;
+            }
+        }
+        arr[startIndex] = arr[mark];
+        arr[mark] = pivot;
+        return mark;
+    }
+
+    /**
      * 快速排序(双边循环)
      * @param arr           待排序数组
      * @param startIndex    起点坐标
@@ -195,19 +236,19 @@ public class SortTest {
         while (startIndex >= endIndex) {
             return;
         }
-        int pivotIndex = getPivotIndex(arr, startIndex, endIndex);
+        int pivotIndex = getPivotIndexDouble(arr, startIndex, endIndex);
         // 分治法进行下两组快排
         quickSortDouble(arr, startIndex, pivotIndex - 1);
         quickSortDouble(arr, pivotIndex + 1, endIndex);
     }
 
     /**
-     * 获得基准元素位置
+     * 获得基准元素位置(双边循环)
      * @param arr           待排序数组
      * @param startIndex    起始点
      * @param endIndex      结束点
      */
-    private static int getPivotIndex(int[] arr, int startIndex, int endIndex) {
+    private static int getPivotIndexDouble(int[] arr, int startIndex, int endIndex) {
         int pivot = arr[startIndex];
         // 初始化左指针和右指针
         int left = startIndex;
