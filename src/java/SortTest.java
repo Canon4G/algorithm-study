@@ -11,7 +11,8 @@ public class SortTest {
 //        bubbleSort1(a);
 //        bubbleSort2(a);
 //        cocktailSort(a);
-        cocktailSort1(a);
+//        cocktailSort1(a);
+        cocktailSort2(a);
         System.out.println(Arrays.toString(a));
     }
 
@@ -139,6 +140,47 @@ public class SortTest {
             if (!swapFlag) {
                 break;
             }
+        }
+    }
+
+    /**
+     * 优化鸡尾酒排序
+     * @param arr       待排序数组
+     */
+    private static void cocktailSort2(int[] arr) {
+        for (int i = 0; i < arr.length / 2; i++) {
+            // 正序遍历
+            int temp;
+            // 元素交换标识
+            boolean swapFlag = false;
+            // 正序遍历无序边界
+            int swapIndexAsc = arr.length - i - 1;
+            for (int j = i; j < swapIndexAsc; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    swapFlag = true;
+                    swapIndexAsc = j;
+                }
+            }
+            if (!swapFlag) {
+                break;
+            }
+            // 重新初始化元素交换标识
+            swapFlag = false;
+            for (int j = arr.length - 1; i < j; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                    swapFlag = true;
+                }
+            }
+            if (!swapFlag) {
+                break;
+            }
+
         }
     }
 }
