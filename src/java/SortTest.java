@@ -12,7 +12,8 @@ public class SortTest {
 //        bubbleSort2(a);
 //        cocktailSort(a);
 //        cocktailSort1(a);
-        cocktailSort2(a);
+//        cocktailSort2(a);
+        quickSortDouble(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
 
@@ -182,5 +183,55 @@ public class SortTest {
             }
 
         }
+    }
+
+    /**
+     * 快速排序(双边循环)
+     * @param arr           待排序数组
+     * @param startIndex    起点坐标
+     * @param endIndex      终点坐标
+     */
+    private static void quickSortDouble(int[] arr, int startIndex, int endIndex) {
+        while (startIndex >= endIndex) {
+            return;
+        }
+        int pivotIndex = getPivotIndex(arr, startIndex, endIndex);
+        // 分治法进行下两组快排
+        quickSortDouble(arr, startIndex, pivotIndex - 1);
+        quickSortDouble(arr, pivotIndex + 1, endIndex);
+    }
+
+    /**
+     * 获得基准元素位置
+     * @param arr           待排序数组
+     * @param startIndex    起始点
+     * @param endIndex      结束点
+     */
+    private static int getPivotIndex(int[] arr, int startIndex, int endIndex) {
+        int pivot = arr[startIndex];
+        // 初始化左指针和右指针
+        int left = startIndex;
+        int right = endIndex;
+
+        while (left != right) {
+            // 右指针操作：比较同时向左移动指针
+            while (left < right && arr[right] > pivot) {
+                right--;
+            }
+            // 左指针操作：比较同时向右移动指针
+            while (left < right && arr[left] <= pivot) {
+                left++;
+            }
+            // 进行元素交换
+            if (left < right) {
+                int a = arr[left];
+                arr[left] = arr[right];
+                arr[right] = a;
+            }
+        }
+        // 把基准元素和left和right的重合点元素进行交换
+        arr[startIndex] = arr[left];
+        arr[left] = pivot;
+        return left;
     }
 }
