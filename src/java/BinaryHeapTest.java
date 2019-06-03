@@ -46,7 +46,7 @@ public class BinaryHeapTest {
      * @param arr           二叉堆
      * @param parentIndex   下沉节点
      */
-    private static void downAdjust(int[] arr, int parentIndex) {
+    public static void downAdjust(int[] arr, int parentIndex) {
         int temp = arr[parentIndex];
         int childIndex = (2 * parentIndex) + 1;
         while (childIndex < arr.length) {
