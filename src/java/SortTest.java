@@ -18,7 +18,8 @@ public class SortTest {
 //        cocktailSort2(a);
 //        quickSortDouble(a, 0, a.length - 1);
 //        quickSortSingle(a, 0, a.length - 1);
-        quickSortSingleByStack(a, 0, a.length - 1);
+//        quickSortSingleByStack(a, 0, a.length - 1);
+        headSortASC(a);
         System.out.println(Arrays.toString(a));
     }
 
@@ -317,5 +318,27 @@ public class SortTest {
         arr[startIndex] = arr[left];
         arr[left] = pivot;
         return left;
+    }
+
+    /**
+     * 堆排序(升序)
+     * @param arr       待排序数组
+     */
+    private static void headSortASC(int[] arr) {
+        // 1. 把无序数组构建成二叉堆
+        for (int i = arr.length / 2; i >= 0; i--) {
+            // 二叉堆的下沉操作
+            BinaryHeapTest.downAdjust(arr, i);
+        }
+        System.out.println("构建后的最大堆：" + Arrays.toString(arr));
+        // 2. 循环删除堆顶元素，移到吉和尾部，调整堆产生新的堆顶
+        for (int i = arr.length - 1; i > 0; i--) {
+            // 最后1个元素和第1个元素进行交换
+            int temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+            // 下沉 调整最大堆
+            BinaryHeapTest.downAdjust(arr, 0);
+        }
     }
 }
