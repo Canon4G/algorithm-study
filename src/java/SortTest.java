@@ -9,7 +9,8 @@ import java.util.Stack;
 public class SortTest {
 
     public static void main(String[] args) {
-        int[] a = new int[] {2, 3, 4, 5, 6, 1, 7};
+//        int[] a = new int[] {2, 3, 4, 5, 6, 1, 7};
+        int[] a = new int[] {10, 10, 13, 14, 11, 19, 18, 18, 16};
 //        bubbleSort(a);
 //        bubbleSort1(a);
 //        bubbleSort2(a);
@@ -19,8 +20,8 @@ public class SortTest {
 //        quickSortDouble(a, 0, a.length - 1);
 //        quickSortSingle(a, 0, a.length - 1);
 //        quickSortSingleByStack(a, 0, a.length - 1);
-        headSortASC(a);
-        System.out.println(Arrays.toString(a));
+//        headSortASC(a);
+        System.out.println(Arrays.toString(countSort(a)));
     }
 
     /**
@@ -340,5 +341,41 @@ public class SortTest {
             // 下沉 调整最大堆
             BinaryHeapTest.downAdjust(arr, 0);
         }
+    }
+
+    /**
+     * 计数排序
+     * @param arr       待排序数组
+     */
+    private static int[] countSort(int[] arr) {
+        int max = arr[0];
+        int min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+
+        // 创建计数数组
+        int[] countArr = new int[max - min + 1];
+        for (int i = 0; i < arr.length; i++) {
+            countArr[arr[i] - min]++;
+        }
+
+        // 计数数组变形 用于稳定排序
+        for (int i = 1; i < countArr.length; i++) {
+            countArr[i] += countArr[i - 1];
+        }
+
+        // 重新排序
+        int[] sortedArr = new int[arr.length];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            sortedArr[countArr[arr[i] - min] - 1] = arr[i];
+            countArr[arr[i] - min]--;
+        }
+        return sortedArr;
     }
 }
