@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * create by Canon4G 2019-05-30
@@ -10,7 +7,8 @@ public class SortTest {
 
     public static void main(String[] args) {
 //        int[] a = new int[] {2, 3, 4, 5, 6, 1, 7};
-        int[] a = new int[] {10, 10, 13, 14, 11, 19, 18, 18, 16};
+//        int[] a = new int[] {10, 10, 13, 14, 11, 19, 18, 18, 16};
+        double[] a = new double[] {4.5, 0.5, 3.2, 1.2, 0.7};
 //        bubbleSort(a);
 //        bubbleSort1(a);
 //        bubbleSort2(a);
@@ -21,7 +19,8 @@ public class SortTest {
 //        quickSortSingle(a, 0, a.length - 1);
 //        quickSortSingleByStack(a, 0, a.length - 1);
 //        headSortASC(a);
-        System.out.println(Arrays.toString(countSort(a)));
+//        System.out.println(Arrays.toString(countSort(a)));
+        System.out.println(Arrays.toString(bucketSort(a)));
     }
 
     /**
@@ -375,6 +374,53 @@ public class SortTest {
         for (int i = arr.length - 1; i >= 0; i--) {
             sortedArr[countArr[arr[i] - min] - 1] = arr[i];
             countArr[arr[i] - min]--;
+        }
+        return sortedArr;
+    }
+
+    /**
+     * 桶排序
+     * @param arr       待排序数组
+     */
+    private static double[] bucketSort(double[] arr) {
+        double max = arr[0];
+        double min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+            if (min > arr[i]) {
+                min = arr[i];
+            }
+        }
+        double d = max - min;
+
+        // 初始化桶
+        int bucketNum = arr.length;
+        ArrayList<LinkedList<Double>> bucketList = new ArrayList<>(bucketNum);
+        for (int i = 0; i < bucketNum; i++) {
+            bucketList.add(new LinkedList<>());
+        }
+
+        // 遍历数组 放进桶里
+        for (int i = 0; i < arr.length; i++) {
+            int num = (int) ((arr[i] - min) * (bucketNum - 1) / d);
+            bucketList.get(num).add(arr[i]);
+        }
+
+        // 每个桶内部进行排序
+        for (int i = 0; i < bucketList.size(); i++) {
+            Collections.sort(bucketList.get(i));
+        }
+
+        // 重新组装数组
+        double[] sortedArr = new double[arr.length];
+        int index = 0;
+        for (LinkedList<Double> list : bucketList) {
+            for (double element : list) {
+                sortedArr[index] = element;
+                index++;
+            }
         }
         return sortedArr;
     }
