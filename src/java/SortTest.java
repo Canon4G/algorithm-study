@@ -8,7 +8,8 @@ public class SortTest {
     public static void main(String[] args) {
 //        int[] a = new int[] {2, 3, 4, 5, 6, 1, 7};
 //        int[] a = new int[] {10, 10, 13, 14, 11, 19, 18, 18, 16};
-        double[] a = new double[] {4.5, 0.5, 3.2, 1.2, 0.7};
+//        double[] a = new double[] {4.5, 0.5, 3.2, 1.2, 0.7};
+        int[] a = new int[] {11, 8, 3, 9, 7, 1, 2, 5};
 //        bubbleSort(a);
 //        bubbleSort1(a);
 //        bubbleSort2(a);
@@ -20,7 +21,9 @@ public class SortTest {
 //        quickSortSingleByStack(a, 0, a.length - 1);
 //        headSortASC(a);
 //        System.out.println(Arrays.toString(countSort(a)));
-        System.out.println(Arrays.toString(bucketSort(a)));
+//        System.out.println(Arrays.toString(bucketSort(a)));
+        mergeSort(a, 0, a.length - 1);
+        System.out.println(Arrays.toString(a));
     }
 
     /**
@@ -423,5 +426,55 @@ public class SortTest {
             }
         }
         return sortedArr;
+    }
+
+    /**
+     * 并归排序
+     * @param arr               待排序数组
+     * @param startIndex        起始坐标
+     * @param endIndex          终点坐标
+     */
+    private static void mergeSort(int[] arr, int startIndex, int endIndex) {
+        // 拆分
+        if (startIndex < endIndex) {
+            int mid = (startIndex + endIndex) / 2;
+            mergeSort(arr, startIndex, mid);
+            mergeSort(arr, mid + 1, endIndex);
+            mergeArray(arr, startIndex, mid, endIndex);
+        }
+    }
+
+    /**
+     * 合并
+     * @param arr               待排序数组
+     * @param startIndex        起始坐标
+     * @param mid               中间坐标
+     * @param endIndex          终点坐标
+     */
+    private static void mergeArray(int[] arr, int startIndex, int mid, int endIndex) {
+        // 接收数据临时数组
+        int[] mergeArr = new int[arr.length];
+        int index = 0;
+        int i = startIndex;
+        int j = mid + 1;
+        while (i <= mid && j <= endIndex) {
+            if (arr[i] <= arr[j]) {
+                mergeArr[index++] = arr[i++];
+            } else {
+                mergeArr[index++] = arr[j++];
+            }
+        }
+
+        while (i <= mid) {
+            mergeArr[index++] = arr[i++];
+        }
+
+        while (j <= endIndex) {
+            mergeArr[index++] = arr[j++];
+        }
+
+        for (i = 0; i < index; i++) {
+            arr[startIndex + i] = mergeArr[i];
+        }
     }
 }
